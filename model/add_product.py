@@ -1,6 +1,10 @@
 from nicegui import ui
 from firebase.service import db
 import asyncio
+import supabase
+SUPABASE_URL = "YOUR_SUPABASE_URL"
+SUPABASE_KEY = "YOUR_SUPABASE_KEY"
+supabase_client = supabase.create_client(SUPABASE_URL, SUPABASE_KEY)
 categores=['Chaise','table','étagères','décorations']
 def product_content(contentscren):
         contentscren.clear()
