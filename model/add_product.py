@@ -52,7 +52,7 @@ def product_content(contentscren):
                         'price': float(price.value),
                         'description': description.value,
                         #'image': image.value,
-                        'quntiter': quntiter.value,
+                        'quntiter': int(quntiter.value),
                         'prix_levrisent_ville': prix_levrisent_ville.value,
                         'prix_levrisent_Nonville': prix_levrisent_Nonville.value,
                     }
