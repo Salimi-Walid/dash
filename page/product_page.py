@@ -31,9 +31,10 @@ def products_page():
             best_product.on('click', lambda: print('caming soon'))
         ui.separator().classes('h-full w-1 bg-black mx-4')
         with ui.column().classes('w-65 ') as content:
-            ui.label('If you have any problems adding the product to the application database, please watch the tutorial below.')
+            with ui.card().classes('w-65 h-25 '):
+                ui.label('If you have any problems adding the product to the application database, please watch the tutorial below.')
             ui.video('video/2025-02-24 21-41-57.mp4').classes('w-full h-60 object-contain')
-            ui.label('All information related to the products displayed in the application. Click here')
-            ui.label('Please watch the video to learn how to modify the displayed products.')   
+            with ui.card().classes('w-65 h-25 '):
+                ui.label('All information related to the products displayed in the application. Click here. Please watch the video to learn how to modify the displayed products.')  
             ui.video('video/2025-02-24 21-41-57.mp4').classes('w-full h-60 object-contain')
         
