@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 from nicegui import ui
 from firebase.service import db
 
-def monthly_orders_chart(content):
+def mystuts(content):
     content.clear()
 
     async def fetch_monthly_data():
@@ -43,31 +43,33 @@ def monthly_orders_chart(content):
         if not daily_orders:
             ui.notify("No data available for the current month.", color='warning')
             return
+
         days = sorted(daily_orders.keys())
         order_counts = [daily_orders[day] for day in days]
         profits = [daily_profit[day] for day in days]
+
+        # Create traces for orders and profits
         order_trace = go.Scatter(x=days, y=order_counts, mode='lines+markers', name='Number of Orders')
         profit_trace = go.Scatter(x=days, y=profits, mode='lines+markers', name='Profit')
 
-        # Define the layout
-        layout = go.Layout(
+        # Update the figure with new data
+        fig.data = [order_trace, profit_trace]
+        fig.update_layout(
             title='Daily Orders and Profit for the Current Month',
-            xaxis=dict(title='Date'),
-            yaxis=dict(title='Count / Profit'),
+            xaxis_title='Date',
+            yaxis_title='Count / Profit',
             legend=dict(x=0, y=1)
         )
-
-        # Create the figure
-        fig = go.Figure(data=[order_trace, profit_trace], layout=layout)
-
-        # Update the Plotly chart
-        plotly_chart.figure = fig
         plotly_chart.update()
+
+    # Initialize an empty figure
+    fig = go.Figure()
 
     with content:
         ui.label('📈 Monthly Orders and Profit').classes('text-h4')
 
-        plotly_chart = ui.plotly()
+        # Initialize the Plotly chart with the empty figure
+        plotly_chart = ui.plotly(fig)
         ui.button('🔄 Refresh Chart', icon='refresh', on_click=load_chart).props('color=primary')
 
         ui.timer(1, load_chart, once=True)

@@ -11,10 +11,10 @@ async def my_products(my_prods):
             name = ui.input('Product Name', value=product.get('name', '')).props('filled')
             price = ui.number('Price', value=product.get('price', 0)).props('filled')
             description = ui.textarea('Description', value=product.get('description', '')).props('filled')
-            image_url = ui.input('Image URL', value=product.get('image_url', '')).props('filled')
-            quantity = ui.number('Quantity', value=product.get('quntiter', 0)).props('filled')
-            price_city = ui.number('Price Delivery (City)', value=product.get('prix_levrisent_ville', 0)).props('filled')
-            price_non_city = ui.number('Price Delivery (Non-city)', value=product.get('prix_levrisent_Nonville', 0)).props('filled')
+            image_url = ui.input('Image URL', value=product.get('image', '')).props('filled')
+            quantity = ui.number('Quantity', value=product.get('quantity', 0)).props('filled')
+            price_city = ui.number('Price Delivery (City)', value=product.get('prix_livraison_ville', 0)).props('filled')
+            price_non_city = ui.number('Price Delivery (Non-city)', value=product.get('prix_livraison_hors_ville', 0)).props('filled')
 
             async def update_product():
                 try:
@@ -22,10 +22,10 @@ async def my_products(my_prods):
                         'name': name.value,
                         'price': float(price.value),
                         'description': description.value,
-                        'image_url': image_url.value,
-                        'quntiter': quantity.value,
-                        'prix_levrisent_ville': price_city.value,
-                        'prix_levrisent_Nonville': price_non_city.value,
+                        'image': image_url.value,
+                        'quantity': quantity.value,
+                        'prix_livraison_ville': price_city.value,
+                        'prix_livraison_hors_ville': price_non_city.value,
                     }
                     await asyncio.to_thread(
                         db.collection('products').document(doc.id).update,
@@ -37,7 +37,7 @@ async def my_products(my_prods):
                 except Exception as e:
                     ui.notify(f"Update failed: {str(e)}", color='negative')
 
-            ui.button('Save Changes', on_click=update_product).props('color=primary')
+            ui.button('Save Changes', on_click=lambda : update_product()).props('color=primary')
             ui.button('Cancel', on_click=edit_dialog.close).props('color=secondary')
         edit_dialog.open()
     with my_prods:
@@ -56,15 +56,16 @@ async def my_products(my_prods):
             with my_prods:
                 with ui.row():
                     with ui.card().classes('mb-4 p-4'):
-                        if 'image_url' in product:
-                            ui.image(product['image_url']).classes('w-48 h-48 object-contain')
+                        if 'image' in product:
+                            ui.image(product['image']).classes('w-48 h-48 object-contain')
                         ui.label(f"Name: {product.get('name', 'N/A')}")
                         ui.label(f"ID: {doc.id}")
                         ui.label(f"Price: ${product.get('price', 0):.2f} DH")
                         ui.label(f"Description: {product.get('description', 'N/A')}")
-                        ui.label(f"Quantity: {product.get('quntiter', 0):.2f}")
-                        ui.label(f"Price Delivery (City): ${product.get('prix_levrisent_ville', 0):.2f} DH")
-                        ui.label(f"Price Delivery (Non-city): ${product.get('prix_levrisent_Nonville', 0):.2f} DH")
+                        ui.label(f"Quantity: {product.get('quantity', 0):.2f}")
+                        ui.label(f"Price Delivery (City): ${product.get('prix_livraison_ville', 0):.2f} DH")
+                        ui.label(f"Price Delivery (Non-city): ${product.get('prix_livraison_hors_ville', 0):.2f} DH")
+                        ui.label(f"category: {product.get('category', 'N/A')}")
                         async def delete_product(doc_id=doc.id):
                             try:
                                 await asyncio.to_thread(

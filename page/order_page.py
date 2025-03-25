@@ -1,7 +1,7 @@
 
 from nicegui import ui
 from model.my_orders import myOrder
-from model.my_stuts import myStuts
+from model.my_stuts import mystuts
 def orders_page():
     with ui.header().classes('bg-black'):
         ui.icon('arrow_back').classes('text-h4 color-white cursor-pointer').on('click', lambda: ui.run_javascript('window.history.back()'))
@@ -17,7 +17,7 @@ def orders_page():
                 with ui.row():
                     ui.icon('inventory_2').classes('text-h5 m-4')
                     ui.label('My Stutes').classes('text-h6 m-4')
-            my_stutes.on('click', lambda: myStuts(content))
+            my_stutes.on('click', lambda: mystuts(content))
             with ui.card().classes('justify-center items-center cursor-pointer h-16 w-full ') as best_product:
                 with ui.row():
                     ui.icon('star').classes('text-h5 m-4')
