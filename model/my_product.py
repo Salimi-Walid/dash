@@ -23,9 +23,9 @@ async def my_products(my_prods):
                         'price': float(price.value),
                         'description': description.value,
                         'image_url': image_url.value,
-                        'quntiter': int(quantity.value),
-                        'prix_levrisent_ville': float(price_city.value),
-                        'prix_levrisent_Nonville': float(price_non_city.value),
+                        'quntiter': quantity.value,
+                        'prix_levrisent_ville': price_city.value,
+                        'prix_levrisent_Nonville': price_non_city.value,
                     }
                     await asyncio.to_thread(
                         db.collection('products').document(doc.id).update,

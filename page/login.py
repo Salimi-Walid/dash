@@ -6,7 +6,7 @@ def login_page():
             /* From Uiverse.io by alexruix */ 
 .form-box {
   max-width: 300px;
-  background: #f1f7fe;
+  background: #050505;
   overflow: hidden;
   border-radius: 16px;
   color: #010101;
@@ -25,11 +25,12 @@ def login_page():
 .title {
   font-weight: bold;
   font-size: 1.6rem;
+  color: #fcfcfc;
 }
 
 .subtitle {
   font-size: 1rem;
-  color: #666;
+  color: #fcfcfc;
 }
 
 /*Inputs box*/
@@ -72,8 +73,8 @@ def login_page():
 
 /*Button*/
 .form button {
-  background-color: #0066ff;
-  color: #fff;
+  background-color: #fcfcfc;
+  color: #050505;
   border: 0;
   border-radius: 24px;
   padding: 10px 16px;
@@ -84,7 +85,7 @@ def login_page():
 }
 
 .form button:hover {
-  background-color: #005ce6;
+  background-color: #fcfcfc;
 }
         </style>
         <div class="form-box">

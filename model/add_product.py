@@ -59,7 +59,7 @@ def product_content(contentscren):
             category = ui.select(categores, multiple=True, value=categores[:1], label='Categories').classes('w-50').props('use-chips filled')
 
         # Hidden input to store image URL
-        hidden_image_url = ui.input('', visible=False)
+        hidden_image_url = ui.input('').style('display: none')
 
         # Status label for errors
         status_label = ui.label('').classes('text-red-500')
