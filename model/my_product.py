@@ -62,9 +62,9 @@ async def my_products(my_prods):
                         ui.label(f"ID: {doc.id}")
                         ui.label(f"Price: ${product.get('price', 0):.2f} DH")
                         ui.label(f"Description: {product.get('description', 'N/A')}")
-                        ui.label(f"Quantity: {product.get('quntiter', 0)}")
-                        ui.label(f"Price Delivery (City): ${product.get('prix_levrisent_ville', 0)} DH")
-                        ui.label(f"Price Delivery (Non-city): ${product.get('prix_levrisent_Nonville', 0)} DH")
+                        ui.label(f"Quantity: {product.get('quntiter', 0):.2f}")
+                        ui.label(f"Price Delivery (City): ${product.get('prix_levrisent_ville', 0):.2f} DH")
+                        ui.label(f"Price Delivery (Non-city): ${product.get('prix_levrisent_Nonville', 0):.2f} DH")
                         async def delete_product(doc_id=doc.id):
                             try:
                                 await asyncio.to_thread(
